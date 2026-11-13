@@ -13,25 +13,35 @@
 | 路径 | 内容 |
 |---|---|
 | `PROTOCOL.md` | 评审协议。**评审方先读这个** |
-| `EXTERNAL_REVIEW.md` | 历次评审意见原文留痕（收到意见后由执行方原样写入） |
+| `EXTERNAL_REVIEW.md` | 历次评审意见**原文**留痕 + 逐条处理索引 |
 | `tools/asset_lint.py` | N1 的测量器 |
-| `tools/make_n2_facts.py` | N2 的测量器：从日志 / PNG / JSON / git 生成 `FACTS.md` |
+| `tools/make_n2_facts.py` | N2 的测量器 v2：从日志 / PNG / JSON / git 生成 `FACTS.md` |
 | `tools/ref_*.png` | N1 达标参照（数值达标、美术不可用）。**评审方不需要读图** |
 | `N1_spec_freeze/` | 节点 1：土豆切面 A-2 / 丝束 v06 规格冻结，待评审 |
-| `N2_acceptance/` | 节点 2：青椒 S7–S12 / v08 产出验收，`README / SPEC / FACTS` 三文件，待评审 |
+| `N2_acceptance/` | 节点 2：青椒 S7–S12 / v08 产出验收，`README / SPEC(v2) / FACTS` 三文件 |
+| `N2_acceptance/evidence/` | **两份纯文本运行日志**（非图片、非源码），使 `FACTS.md` 表 1/2 可被外部独立重跑 |
 
 ## 节点索引
 
 | 节点 | 时机 | 评审方要回答 | 状态 |
 |---|---|---|---|
-| N1 规格冻结 | 动手前 | 哪些条款无法判定 / 偏离原意 / 自相矛盾 | **待评审**（土豆线） |
-| N2 产出验收 | 宣布完成时 | 数字与结论是否互相矛盾 | **待评审**（青椒线，2026-11-13 发布） |
+| N1 规格冻结 | 动手前 | 哪些条款无法判定 / 偏离原意 / 自相矛盾 | **待评审**（土豆线）。另：青椒线从未走过 N1，见 `EXTERNAL_REVIEW.md` [5] |
+| N2 产出验收 | 宣布完成时 | 数字与结论是否互相矛盾 | **CONDITIONAL（首轮 13:41）→ 已修订 SPEC v2，待复评** |
+
+## 首轮 N2 评审结果（摘要）
+
+`VERDICT: CONDITIONAL`，六条意见原文与逐条处理见 `EXTERNAL_REVIEW.md`。
+其中 [1]–[4] 是结论越界 / 证据缺口，已补 `FACTS.md` 表 7–9 并收紧 README §3；
+[5]（青椒未走 N1）与 [6]（输入私有）是**流程缺陷**，不靠改叙述「补」掉：
+前者判定为不可事后补救、本节点降级为事后数字一致性审查；后者通过公开两份纯文本日志使表 1/2 可复跑，
+表 3–9 仍不可复跑，均如实保留。`SPEC.md` 升为 v2，N2-01..16 期望值一字未改。
 
 ## 三条硬规则
 
 1. **评审方不看图。** 图只给用户，因为审美判断是用户的职责，不是模型的。
 2. **数字必须可复现。** `FACTS.md` 每张表都带生成命令与输入 SHA256。
-   - **N2 已知例外**：输入文件在私有 Unity 仓库，公开仓库只有脚本与哈希，评审方**不能独立重跑**；见 `N2_acceptance/README.md` 主张 C5。这条不因「完工」消失。
+   - **N2 表 1 / 表 2 已可独立重跑**：`python tools/make_n2_facts.py verify` / `live` 只读 `N2_acceptance/evidence/` 的公开日志，执行方实测输出与 `FACTS.md` 逐字节一致。
+   - **N2 表 3–9 已知例外**：输入含私有 Unity 仓库的 PNG / JSON / git，公开仓库只有脚本与哈希，评审方**不能独立重跑**；可用 `N2_PUBLIC_ONLY=1 python tools/make_n2_facts.py changes` 演示脚本拒绝边界。见 `SPEC.md §E` / `EXTERNAL_REVIEW.md` [6]。这条不因「完工」消失。
 3. **只找反例。** 「整体合理」不是有效输出。
 
 ## 术语

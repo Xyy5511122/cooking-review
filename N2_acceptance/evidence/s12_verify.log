@@ -1,0 +1,77 @@
+=== 1. 退出 Play + 强制刷新编译 ===
+[manage_editor] {"success":true,"message":"Exited play mode.","data":null}
+[read_console] {"success":true,"message":"Console cleared successfully."}
+[refresh_unity] {"success":true,"message":"Refresh requested.","error":null,"data":{"refresh_triggered":true,"compile_requested":true,"compile_started":true,"resulting_state":"compiling","hint":"If Unity enters compi
+    0 compiling=False playing=False
+=== 2. 编译错误 ===
+[read_console] {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+{"success":true,"message":"Retrieved 0 log entries.","data":[]}
+=== 3. S10 数据探针 ===
+isCompiling=False isPlaying=False
+choreo IsValid=True reason= steps=3
+S10 headPiece=green_pepper_prep_head_piece buttPiece=green_pepper_prep_butt_piece openSheet=green_pepper_base_1024 openLeft=green_pepper_open_left openRight=green_pepper_open_right pieceDur=0.55 openDur=0.75
+  step0 id=cut_head trigger=KeyQ swipe=Horizontal zone=0.78..1.02 art=OK hand=OK
+  step1 id=cut_butt trigger=KeyE swipe=Horizontal zone=-0.02..0.22 art=OK hand=OK
+  step2 id=open_sheet trigger=KeyQE swipe=Vertical zone=0.35..0.65 art=OK hand=OK
+  S10 sprite green_pepper_prep_head_piece=True
+  S10 sprite green_pepper_prep_butt_piece=True
+  S10 sprite green_pepper_base_1024=True
+raw.choreography==asset: True
+beef.choreography null: True
+profile IsValid=True reason= showCutFace=False pileShiftFrac=0.82 stripOriginX=-0.22
+  resolve.sheetArtPrefix=green_pepper_sheet_ sheetFrames=5 sheetCutFracs=5 pileShiftFrac=0.82
+beef profile: sheetPrefix='' sheetFrames=0 pileShiftFrac=-1
+potato profile: sheetPrefix='' sheetFrames=0 pileShiftFrac=-1
+FULLRECT 33/33 missing=0
+  S11 green_pepper_prep_hand tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_prep_headless tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_prep_no_butt tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_prep_head_piece tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_prep_butt_piece tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_open_left tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_open_right tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_sheet_1 tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_sheet_2 tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_sheet_3 tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_sheet_4 tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+  S11 green_pepper_sheet_5 tex=1024x1024 rect=(x:0, y:0, width:1024, height:1024) full=True readable=False
+S11 CHANGED SPRITES 12/12
+
+=== 4. 完整回归 DevSelfTest ===
+   old results mtime = 1794545923.2457094
+   start: selftest started; flag=True isPlaying=False
+   waiting 0 mtime 1794545923.2457094 req True
+   waiting 10 mtime 1794545923.2457094 req True
+   waiting 20 mtime 1794545923.2457094 req True
+   results updated at poll 23
+   lines=300 PASS=300 FAIL=0
+    PASS | 19 | S10 单份：前置流程层独占画面
+    PASS | 20 | S10 单份：本体主图在前置流程期间隐藏（修两个青椒重合）
+    PASS | 21 | S9 重叠：前置流程未完成前 A-1 方片不接管画面
+    PASS | 22 | S9 分离：青椒丝堆独立右移 pileShiftFrac=0.82（S10 摊平片放大后同步加大）
+    PASS | 23 | S9 分离：青椒丝堆缩小 pileScale=0.78
+    PASS | 24 | S9 兼容：牛肉/土豆未配置新字段，沿用 stageShift 且缩放不变
+    PASS | 25 | S9 反馈：前置流程绑定柔绿刀光与碎屑素材
+    PASS | 26 | S9 反馈：柔光/碎屑 Sprite 可加载
+    PASS | 27 | S10 分段：青椒启用 5 张不规则切面剩余片
+    PASS | 28 | S10 分段：5 个刀口位置与帧数一致
+    PASS | 29 | S10 兼容：牛肉/土豆未启用分段模式，仍走 Filled 遮罩
+    PASS | 30 | S10 分段：sheet_1..5 Sprite 全部可加载
+    PASS | 31 | S10 动态：掐头去尾掉落段 Sprite 可加载
+    PASS | 32 | S10 动态：前置资产绑定掉段动画与剖开摊平过渡
+    PASS | 33 | S10 动态：剖开两半椒 Sprite 可加载
+    PASS | 34 | S10 动态：剖开过渡用独立半椒且有足够展开时间
+    PASS | 41 | S10 动态：Q 切头启动了头段飞离动画
+    PASS | 43 | S10 动态：E 切尾启动了尾段飞离动画
+    PASS | 45 | S10 动态：QE 剖开启动了摊平过渡动画
+    PASS | 46 | S10 动态：过渡动画期间仍拦住 QE 序列、切丝层不让位
+    PASS | 48 | S9 重叠：QE 剖开摊平完成后方片才出现
+    PASS | 49 | S10 分段：运行时切丝层走分段贴图而非 Filled 硬裁切
+=== 5. 回归后控制台错误 ===
+[read_console] {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+{"success":true,"message":"Retrieved 0 log entries.","data":[]}
+=== 6. 工程保护状态 ===
+   git log -1 --format='%h %s' -> 
+   git branch --show-current -> refactor/data-driven-food
+   git status --short | wc -l -> 93
+   request file exists: False
