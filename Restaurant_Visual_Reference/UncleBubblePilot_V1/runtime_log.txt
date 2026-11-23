@@ -1,0 +1,36 @@
+Uncle 气泡 V1 Play Mode 验证原始日志
+分辨率：1920x1200（沿用上一轮 16:10 验证遗留的 GameView 尺寸，本轮未改画幅策略）
+
+=== 运行结构（等待订单状态）===
+T1 state=Waiting order=青椒炒肉¥28 sprite=bubble_uncle_clean
+  bubbleRect=662.0,718.9-915.0,858.0
+  i0=food_dish_pepper_beef rect=718.8,733.6-858.1,872.9 ; i1=off ; i2=off
+T0 state=Waiting sprite=bubble_boy_clean
+  bubbleRect=120.2,706.2-481.7,921.3
+  i0=food_dish_potato_cake col=(1,1,1,1) ; i1=food_dish_pepper_beef col=(1,1,1,1) ; i2=off
+T4 state=Waiting sprite=bubble_girl_clean
+  bubbleRect=1536.9,691.5-1832.0,855.9
+  i0=food_dish_tomato_egg ; i1=food_dish_pepper_beef ; i2=food_dish_potato_cake（均 col=(1,1,1,1)）
+
+=== 上菜灰化 ===
+Uncle ServeOne("dish_pepper_beef") = True
+  Uncle i0 color = RGBA(0.50, 0.50, 0.50, 1.00)  <- 已灰化
+  Boy   i0 color = RGBA(1.00, 1.00, 1.00, 1.00)  <- 未受影响
+  Girl  i0 color = RGBA(1.00, 1.00, 1.00, 1.00)  <- 未受影响
+  bubble active = True（等待所有菜上齐）
+
+=== 完成与隐藏 ===
+Uncle StartEating() 后 ManualTick(999)：state=Leaving, bubble=True, icon0=True
+再 ManualTick(999)：state=CoinAndTrash, bubble=False, icon0=False  <- 气泡与图标一起隐藏
+同时 Boy=Waiting(bubble=True)、Girl=Waiting(bubble=True)  <- 互不干扰
+
+=== Console ===
+error 数 = 0
+
+=== 截图 ===
+uncle_v1_all_five_orders.png      五桌同时营业（Uncle 单菜灰化前）
+uncle_v1_after_serve_gray.png     Uncle 图标灰化，Boy/Girl 保持彩色
+uncle_v1_after_finish_hidden.png  Uncle 离场后气泡隐藏，Boy/Girl 仍在
+
+=== 退出 ===
+Play Mode 已停止；工作区 212 项未提交改动完整保留，HEAD 未变

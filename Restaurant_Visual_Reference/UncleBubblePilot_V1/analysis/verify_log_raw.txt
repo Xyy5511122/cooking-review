@@ -1,0 +1,9 @@
+PLAY :: playing=True screen=1920x1200
+SETUP :: cover=False tables=5
+STRUCTURE_ALL_ORDERS :: {"success":false,"message":"Compilation failed","data":{"errors":["Line 22: Type `UnityEngine.GameObject' does not contain a definition for `GetWorldCorners' and no extension method `GetWorldCorners' of type `UnityEngine.GameObject' could be found. Are you missing an assembly reference?"],"compiler":"codedom"}}
+CAPTURE :: uncle_v1_all_five_orders.png bytes=2723642
+SERVE_UNCLE_GRAY :: serve=True iconColor=RGBA(0.50, 0.50, 0.50, 1.00) childActive=True bubble=True boyColor=RGBA(1.00, 1.00, 1.00, 1.00) girlColor=RGBA(1.00, 1.00, 1.00, 1.00)
+CAPTURE :: uncle_v1_after_serve_gray.png bytes=2720635
+UNCLE_FINISH_HIDE :: state=Leaving bubble=True icon0=True || state=CoinAndTrash bubble=False icon0=False || boy=Waiting girl=Waiting boyBubble=True girlBubble=True
+CAPTURE :: uncle_v1_after_finish_hidden.png bytes=2674169
+CONSOLE_ERRORS :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
