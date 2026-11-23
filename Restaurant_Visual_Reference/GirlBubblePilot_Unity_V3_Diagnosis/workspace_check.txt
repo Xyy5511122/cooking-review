@@ -1,0 +1,34 @@
+Girl V2 5:4 裁切问题独立诊断 —— 工作区安全复核
+========================================================
+性质：只读诊断，不修改工程、不提交主仓库。
+
+诊断前（baseline_before.txt，已落盘于工作区）
+  主仓库分支: refactor/data-driven-food
+  主仓库 HEAD: d2f014507388893dbcb053ae4929d81734efb8e6
+  未提交改动数: 212
+  Boy V3 MD5: 197305afc71dad9f3ffb795942171024
+  Girl V2 MD5: 09eac2128e06c41c3152d8552a28bb52
+  审阅仓库: main @ 380a1179ff2855019ee7ae2ae46915bd86d85eca, clean
+
+诊断后
+  主仓库分支: refactor/data-driven-food          （一致）
+  主仓库 HEAD: d2f014507388893dbcb053ae4929d81734efb8e6（一致）
+  未提交改动数: 212                              （一致）
+  Boy V3 MD5: 197305afc71dad9f3ffb795942171024  （一致）
+  Girl V2 MD5: 09eac2128e06c41c3152d8552a28bb52  （一致）
+
+  git status --porcelain vs 上一任务结束状态: diff 无差异（STATUS_IDENTICAL_TO_LAST_TASK）
+  Assets 目录 2026-11-23 22:15 之后写入的文件: 无
+  Assets/_Recovery 2026-11-23 21:55 之后新增快照: 无
+  本轮是否进入 Play Mode: 否
+  本轮是否创建 Recovery 快照: 否
+  本轮是否修改 C# / Prefab / Scene / PNG / Meta / ProjectSettings: 否
+  本轮是否提交或推送主仓库: 否
+
+本轮写入范围（仅审阅仓库新目录）
+  Restaurant_Visual_Reference/GirlBubblePilot_Unity_V3_Diagnosis/
+    - diagnosis_report.md
+    - coordinate_evidence.txt
+    - solution_options.md
+    - workspace_check.txt
+    - resolution_comparison/*.png（6 张已审阅分辨率截图 + 1 张坐标系对照图）
