@@ -1,0 +1,185 @@
+{
+  "crop_origin": [
+    1458,
+    268
+  ],
+  "crop_size": [
+    280,
+    156
+  ],
+  "background_md5": "6debb05465fd74ee9572490a98b24b10",
+  "original_md5": "4338eb22139d2d3f09c429e558eb7e94",
+  "v1_candidate_md5": "4b81c3dc3c8a974a360bea5339ca5475",
+  "v2_candidate_md5": "09eac2128e06c41c3152d8552a28bb52",
+  "boy_v3_md5": "197305afc71dad9f3ffb795942171024",
+  "changed_px": 16403,
+  "changed_ratio": 37.55265567765568,
+  "changed_bbox": [
+    25,
+    255,
+    28,
+    120
+  ],
+  "min_distance_changed_to_dark_stroke_core": 8.06225774829855,
+  "max_distance_changed_to_dark_stroke_core": 58.0,
+  "stroke_component_px": 2369,
+  "stroke_unchanged_px": 2369,
+  "dark_components": [
+    {
+      "rank": 1,
+      "size": 2369,
+      "bbox": [
+        12,
+        279,
+        0,
+        150
+      ],
+      "unchanged_in_candidate": 2369,
+      "unchanged_bbox": [
+        12,
+        279,
+        0,
+        150
+      ],
+      "unchanged_min_distance_to_stroke": 0.0,
+      "unchanged_max_distance_to_stroke": 0.0
+    },
+    {
+      "rank": 2,
+      "size": 161,
+      "bbox": [
+        48,
+        141,
+        60,
+        102
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 3,
+      "size": 63,
+      "bbox": [
+        181,
+        232,
+        99,
+        105
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 4,
+      "size": 38,
+      "bbox": [
+        239,
+        252,
+        75,
+        95
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 5,
+      "size": 15,
+      "bbox": [
+        34,
+        41,
+        81,
+        88
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 6,
+      "size": 14,
+      "bbox": [
+        198,
+        207,
+        94,
+        96
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 7,
+      "size": 12,
+      "bbox": [
+        274,
+        275,
+        27,
+        36
+      ],
+      "unchanged_in_candidate": 12,
+      "unchanged_bbox": [
+        274,
+        275,
+        27,
+        36
+      ],
+      "unchanged_min_distance_to_stroke": 22.627416997969522,
+      "unchanged_max_distance_to_stroke": 29.0
+    },
+    {
+      "rank": 8,
+      "size": 10,
+      "bbox": [
+        146,
+        148,
+        75,
+        82
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 9,
+      "size": 10,
+      "bbox": [
+        149,
+        153,
+        83,
+        88
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 10,
+      "size": 9,
+      "bbox": [
+        223,
+        229,
+        88,
+        90
+      ],
+      "unchanged_in_candidate": 0
+    },
+    {
+      "rank": 11,
+      "size": 8,
+      "bbox": [
+        276,
+        279,
+        37,
+        41
+      ],
+      "unchanged_in_candidate": 8,
+      "unchanged_bbox": [
+        276,
+        279,
+        37,
+        41
+      ],
+      "unchanged_min_distance_to_stroke": 21.93171219946131,
+      "unchanged_max_distance_to_stroke": 22.80350850198276
+    },
+    {
+      "rank": 12,
+      "size": 8,
+      "bbox": [
+        232,
+        236,
+        83,
+        86
+      ],
+      "unchanged_in_candidate": 0
+    }
+  ]
+}
