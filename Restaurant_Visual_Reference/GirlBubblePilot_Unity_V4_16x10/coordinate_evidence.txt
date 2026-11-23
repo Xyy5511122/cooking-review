@@ -1,0 +1,88 @@
+16:10 目标画幅补充验证 —— 坐标与缩放证据
+生成时间：2026-11-23 23:20 GMT+8
+性质：只读运行时验证。未修改主工程任何文件；未改 CanvasScaler / UI 坐标 / 素材；未提交或推送主仓库；未执行 reset/clean/stash/rebase；未创建 Recovery。
+
+【起始/结束基线】
+分支：refactor/data-driven-food（前后一致）
+HEAD：d2f014507388893dbcb053ae4929d81734efb8e6（前后一致）
+git status --porcelain 行数：212 → 212
+status 快照 SHA256：3e2d8fca9ad2d8aaba33cf349d289a3dbe377f86ef0859590cc2dc1465cf39b2 → 同值
+Boy V3 MD5：197305afc71dad9f3ffb795942171024 → 同值
+Girl V2 MD5：09eac2128e06c41c3152d8552a28bb52 → 同值
+Assets 目录在 2026-11-23 22:56 之后无任何文件写入；_Recovery 目录最后修改 16:02，无新增快照。
+
+【源码证据】
+GameBootstrap.cs:15-25：
+  CanvasScaler.uiScaleMode = ScaleWithScreenSize
+  referenceResolution = (1920, 1080)
+  screenMatchMode = MatchWidthOrHeight
+  matchWidthOrHeight = 0.5f
+UIBuilder.cs:1156-1189：五桌固定参考坐标；左下原点。
+UIBuilder.cs:1375-1379：Girl 气泡 x=1458,y=656,w=280,h=156。
+UIBuilder.cs:1416-1419：Girl 耐心条 x=1458, y_img=432, h=60, w=205（UI y=1080-432-60=588）。
+ProjectSettings.asset:44-47：defaultScreenWidth=1920, defaultScreenHeight=1080,
+  defaultScreenWidthWeb=960, defaultScreenHeightWeb=600。
+ProjectSettings.asset 中无任何 WebGL 构建脚本引用；Assets/**/*.cs 中无 BuildPipeline / BuildTarget.WebGL。
+
+【公式】
+match=0.5 的几何插值：
+  s = sqrt((screenW/1920) * (screenH/1080))
+  visible_ref_w = screenW / s
+  visible_ref_h = screenH / s
+16:10 的两个测试分辨率互为 2 倍，s 不同但 visible_ref 相同。
+
+【Unity 运行时读数（真实 Play Mode）】
+分辨率      screenWxH   Canvas.scaleFactor  公式 s      差值       可视参考宽      可视参考高     顶部空条
+960x600     960x600     0.5270463           0.5270463   0.0000000   1821.47         1138.42        31 px
+1920x1200   1920x1200   1.0540930           1.0540930   0.0000000   1821.47         1138.42        62 px
+顶部空条颜色 RGB(23,26,33)；左右无留黑，背景被横向裁切 51.9 px / 103.9 px。
+
+【Girl 气泡实际屏幕边界】
+参考坐标矩形：x=1458..1738, y=656..812（左下原点）。
+公式预测 = 参考坐标 * s；运行时读数来自 RectTransform.GetWorldCorners（Screen Space Overlay 下即屏幕像素）。
+960x600：
+  预测 x=768.43..915.90, y=345.75..427.96
+  实测 x=768.4..916.0,  y=345.7..428.0
+  右余量 44.0 px；上余量 172.0 px。
+1920x1200：
+  预测 x=1536.85..1831.82, y=691.49..855.92
+  实测 x=1536.9..1832.0,  y=691.5..855.9
+  右余量 88.0 px；上余量 344.1 px。
+误差均 ≤0.2 px。
+
+【Girl 耐心条实际屏幕边界】
+参考坐标矩形：x=1458..1663, y=588..648。
+960x600：
+  预测 x=768.43..876.49, y=309.90..341.52
+  实测 x=768.4..876.5,  y=309.9..341.5
+  右余量 83.5 px。
+1920x1200：
+  预测 x=1536.85..1752.99, y=619.80..683.04
+  实测 x=1536.9..1753.0,  y=619.8..683.1
+  右余量 167.0 px。
+
+【CanvasScaler.scaleFactor 属性读回异常】
+本次会话中 CanvasScaler.scaleFactor 属性读回恒为 1.0000000，但 Canvas.scaleFactor 分别为 0.5270463 / 1.0540930，
+且所有 RectTransform 世界角点与公式完全吻合。因此以 Canvas.scaleFactor + 世界角点为权威读数；
+属性读回值视为编辑器读回异常，不影响布局结论。未修改该属性。
+
+【其他 UI 边界（实测屏幕像素，左下原点）】
+960x600：Boy 气泡 60.1..240.9；Boy 耐心条 232.4..344.2；Girl feed 764.2..864.4；
+  Girl coin 859.1..886.5；Girl trash 822.2..849.6。均在屏内。
+1920x1200：Boy 气泡 120.2..481.7；Boy 耐心条 464.9..688.3；Girl feed 1528.4..1728.7；
+  Girl coin 1718.2..1773.0；Girl trash 1644.4..1699.2。均在屏内。
+TopBar 实际内容最右参考 x=1330 → 700.5 px / 1401.0 px，屏内；但当前工作区已有布局覆盖把四个按钮节点
+移到 y=8..65（屏幕底部），此现象与画幅无关，本轮未改。
+
+【拖拽投喂证据】
+真实 OS 鼠标在本会话 GameView 中出现输入读数不稳定（同一位置多次读取在 0 与有效值间跳变），
+无法可靠完成闭环，故改用 PointerSystem.HandleFrame —— 源码注释明确为“真实输入与自动化模拟共用同一套逻辑”。
+960x600：Girl 命中，served=100（3 菜第 1 道已上，图标变灰）；Boy 命中，served=10。
+1920x1200：Girl 命中，served=100；Boy 命中，served=10。
+控制台 error 条数：0。真实 OS 级鼠标拖拽在 16:10 下未完成验证，列为未验证事项。
+
+【Web 目标证据】
+- 唯一明确硬性目标：REVIEW_SUMMARY.md:17,29 —— 1920×1080 样板 100% 复现。
+- 960×600 仅出现在 ProjectSettings 的 Unity Web 默认尺寸字段。
+- 工程与审阅仓库均未发现 WebGL 构建脚本、发布计划、浏览器目标文档或 16:10 约定。
+结论：960×600 是默认占位配置，不是已确认的产品需求；本轮仅验证“若走 Web 默认画幅，核心餐厅 UI 是否可用”。

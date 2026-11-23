@@ -1,0 +1,41 @@
+=== 最终采集日志（final_capture.py） ===
+RES :: 960x600
+PLAY :: playing=True screen=960x600
+SETUP :: cover=False tables=5
+METRICS_HEAD :: screen=960x600|scalers=1|scaler0=Canvas,ScaleWithScreenSize,ref=1920x1080,match=0.5000,scalerProp=1.0000000|canvasScale=0.5270463|canvasPixelRect=(x:0.00, y:0.00, width:960.00, height:600.00)|formula_scale=0.5270463|visible_ref=1821.47x1138.42|gm=ok|T0=Waiting,DineIn,bubble=A,bubbleRect=60.1,353.1,240.9,460.6,bar=A,barRect=232.4,267.2,344.2,294.6,feedRect=137.0,168.7,242.4,316.2,coinRect=247.7,226
+CAPTURE :: v4_960x600_16x10_restaurant_all_orders.png bytes=906403
+VIEW_KITCHEN :: ok
+CAPTURE :: v4_960x600_16x10_kitchen_prep.png bytes=753015
+RES :: 1920x1200
+PLAY :: playing=True screen=1920x1200
+SETUP :: cover=False tables=5
+METRICS_HEAD :: screen=1920x1200|scalers=1|scaler0=Canvas,ScaleWithScreenSize,ref=1920x1080,match=0.5000,scalerProp=1.0000000|canvasScale=1.0540930|canvasPixelRect=(x:0.00, y:0.00, width:1920.00, height:1200.00)|formula_scale=1.0540930|visible_ref=1821.47x1138.42|gm=ok|T0=Waiting,DineIn,bubble=A,bubbleRect=120.2,706.2,481.7,921.3,bar=A,barRect=464.9,534.4,688.3,589.2,feedRect=274.1,337.3,484.9,632.5,coinRect=495.
+CAPTURE :: v4_1920x1200_16x10_restaurant_all_orders.png bytes=2723635
+VIEW_KITCHEN :: ok
+CAPTURE :: v4_1920x1200_16x10_kitchen_prep.png bytes=2435677
+CONSOLE_ERRORS :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+
+=== 拖拽验证日志（drag_sim.py，PointerSystem.HandleFrame 同路径） ===
+RES :: 960x600
+PLAY :: playing=True screen=960x600
+SETUP :: setup ok
+SPAWN :: spawn=True
+v4_960x600_16x10_SIM_T4_PTS :: bowl=(411.1,84.8) feed=(814.3,229.3)
+v4_960x600_16x10_SIM_T4_RESULT :: state=Waiting served=100 order=番茄炒鸡蛋¥18  青椒炒肉¥28  酸辣土豆丝¥16 icons=3
+CAPTURE :: v4_960x600_16x10_after_sim_girl.png
+SPAWN :: spawn=True
+v4_960x600_16x10_SIM_T0_PTS :: bowl=(411.1,84.8) feed=(189.7,242.4)
+v4_960x600_16x10_SIM_T0_RESULT :: state=Waiting served=10 order=土豆饼¥16  青椒炒肉¥28 icons=3
+CAPTURE :: v4_960x600_16x10_after_sim_boy_girl.png
+RES :: 1920x1200
+PLAY :: playing=True screen=1920x1200
+SETUP :: setup ok
+SPAWN :: spawn=True
+v4_1920x1200_16x10_SIM_T4_PTS :: bowl=(822.2,169.7) feed=(1628.6,458.5)
+v4_1920x1200_16x10_SIM_T4_RESULT :: state=Waiting served=100 order=番茄炒鸡蛋¥18  青椒炒肉¥28  酸辣土豆丝¥16 icons=3
+CAPTURE :: v4_1920x1200_16x10_after_sim_girl.png
+SPAWN :: spawn=True
+v4_1920x1200_16x10_SIM_T0_PTS :: bowl=(822.2,169.7) feed=(379.5,484.9)
+v4_1920x1200_16x10_SIM_T0_RESULT :: state=Waiting served=10 order=土豆饼¥16  青椒炒肉¥28 icons=3
+CAPTURE :: v4_1920x1200_16x10_after_sim_boy_girl.png
+CONSOLE_ERRORS :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}

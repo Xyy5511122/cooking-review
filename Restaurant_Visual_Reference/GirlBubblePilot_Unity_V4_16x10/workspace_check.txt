@@ -1,0 +1,40 @@
+16:10 补充验证 —— 工作区安全复核
+主仓库：E:/un/u/My project (1)
+
+[开始前]
+分支：refactor/data-driven-food
+HEAD：d2f014507388893dbcb053ae4929d81734efb8e6
+git status --porcelain 行数：212
+git status SHA256：3e2d8fca9ad2d8aaba33cf349d289a3dbe377f86ef0859590cc2dc1465cf39b2
+Assets/Resources/Art/Restaurant/bubble_boy_clean.png MD5：197305afc71dad9f3ffb795942171024
+Assets/Resources/Art/Restaurant/bubble_girl_clean.png MD5：09eac2128e06c41c3152d8552a28bb52
+
+[结束后]
+分支：refactor/data-driven-food
+HEAD：d2f014507388893dbcb053ae4929d81734efb8e6
+git status --porcelain 行数：212
+git status SHA256：3e2d8fca9ad2d8aaba33cf349d289a3dbe377f86ef0859590cc2dc1465cf39b2
+Assets/Resources/Art/Restaurant/bubble_boy_clean.png MD5：197305afc71dad9f3ffb795942171024
+Assets/Resources/Art/Restaurant/bubble_girl_clean.png MD5：09eac2128e06c41c3152d8552a28bb52
+
+[差异检查]
+git status --porcelain 前后逐行 diff：无差异（STATUS_IDENTICAL）
+Assets 目录中 2026-11-23 22:56:00 之后写入的文件：0
+Assets/_Recovery 最后修改：2026-11-23 16:02；本轮无新增快照
+
+[未执行的操作]
+- 未修改任何工程文件（C# / Prefab / Scene / PNG / Meta / ProjectSettings）
+- 未修改 CanvasScaler、UI 坐标、任何素材
+- 未创建 Recovery
+- 未提交或推送主仓库
+- 未执行 reset / clean / stash / rebase
+- 未实施任何修复
+
+[运行时状态]
+- 通过 MCP 进入/退出 Play Mode，仅为读取运行时数据；结束时已 Stop。
+- 截图直接写入审阅仓库 `resolution_comparison/`，未写入主工程根目录。
+- 控制台 error 条数：0。
+
+[审阅仓库]
+推送目录：Restaurant_Visual_Reference/GirlBubblePilot_Unity_V4_16x10/
+仓库：Xyy5511122/cooking-review
