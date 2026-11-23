@@ -1,0 +1,19 @@
+RESET :: removed=0
+SETUP :: ok
+BEFORE_0 :: T0[Waiting/DineIn] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+BEFORE_1 :: T1[Waiting/DineIn] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+BEFORE_2 :: T2[Waiting/Takeout] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+BEFORE_3 :: T3[Waiting/Takeout] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+BEFORE_4 :: T4[Waiting/DineIn] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+BEFORE_INCOME :: ERROR:Compilation failed
+PREP :: ok=True
+ADD_VM :: id=28
+DRAG :: dragging=True item=dish_potato_cake
+AFTER_0 :: T0[Waiting/DineIn] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+AFTER_1 :: T1[Waiting/DineIn] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+AFTER_2 :: T2[Leaving/Takeout] srv=1 c0=RGBA(0.500, 0.500, 0.500, 1.000) bub=0
+AFTER_3 :: T3[Waiting/Takeout] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+AFTER_4 :: T4[Waiting/DineIn] srv=0 c0=RGBA(1.000, 1.000, 1.000, 1.000) bub=1
+AFTER_INCOME :: ERROR:Compilation failed
+CONSOLE :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+STOPPED :: playing=False

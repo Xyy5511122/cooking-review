@@ -1,0 +1,15 @@
+REFRESH :: ok
+SET_RES :: set 1920x1080
+PLAY :: playing=True screen=1920x1080
+SETUP :: setup phase=Open view restaurant
+GEOMETRY :: bubbleScreen=795.0,580.0-1060.0,740.0 bubbleSprite=bubble_riderY_clean_0 iconRect=891.5,651.1-963.3,722.9 sizeDelta=(71.8, 71.8) anchored=(132.4, 107.0) iconSprite=food_dish_potato_cake scaleFactor=1.000000
+STATES :: T0[Waiting/DineIn] order=土豆饼¥16  青椒炒肉¥28 served=00 icons=A/food_dish_potato_cake/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T1[Waiting/DineIn] order=青椒炒肉¥28 served=0 icons=A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T2[Waiting/Takeout] order=土豆饼¥8 served=0 icons=A/food_dish_potato_cake/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T3[Waiting/Takeout] order=番茄炒鸡蛋¥9 served=0 icons=A/food_dish_tomato_egg/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T4[Waiting/DineIn] order=番茄炒鸡蛋¥18  青椒炒肉¥28  酸辣土豆丝¥16 served=000 icons=A/food_dish_tomato_egg/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_hot_sour_potato/RGBA(1.000, 1.000, 1.000, 1.000); bubble=True | 
+CONSOLE :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+CAP_REQ :: ok
+CAP_OK :: ridery_all_five_with_icon bytes=2079012
+ICON_OFF :: off
+CAP_REQ :: ok
+CAP_OK :: ridery_all_five_without_icon bytes=2068690
+ICON_ON :: on
+STATES_FINAL :: T0[Waiting/DineIn] order=土豆饼¥16  青椒炒肉¥28 served=00 icons=A/food_dish_potato_cake/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T1[Waiting/DineIn] order=青椒炒肉¥28 served=0 icons=A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T2[Waiting/Takeout] order=土豆饼¥8 served=0 icons=A/food_dish_potato_cake/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T3[Waiting/Takeout] order=番茄炒鸡蛋¥9 served=0 icons=A/food_dish_tomato_egg/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T4[Waiting/DineIn] order=番茄炒鸡蛋¥18  青椒炒肉¥28  酸辣土豆丝¥16 served=000 icons=A/food_dish_tomato_egg/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_hot_sour_potato/RGBA(1.000, 1.000, 1.000, 1.000); bubble=True | 
+CONSOLE_FINAL :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}

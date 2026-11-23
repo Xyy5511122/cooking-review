@@ -1,0 +1,10 @@
+RESET :: removed=1
+SETUP :: ok
+INCOME_BEFORE :: income=0
+PRICE :: potatoCake dineIn=16 takeout=8
+PREP :: ok=True
+ADD_VM :: id=29
+AFTER_STATE :: state=Leaving served=1 icon=RGBA(0.500, 0.500, 0.500, 1.000)
+INCOME_AFTER :: income=8
+CONSOLE :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+STOPPED :: playing=False

@@ -1,0 +1,19 @@
+RESET_DEVICES :: removed=1
+SETUP :: ok
+BEFORE :: ERROR: Compilation failed
+PREP :: ok=True takeout=True
+POINTS :: bowl=(780.0,161.0) feedRiderY=(880.0,415.0)
+ADD_VM :: id=27 iface=[] cur=27
+MOVE_UP :: q
+PRESS :: q
+AFTER_PRESS :: dragging=True item=dish_potato_cake pressed=False
+BEFORE_RELEASE :: dragging=True item_pos=(880.0, 457.0, 0.0)
+RELEASE_UP :: q
+AFTER_FEED :: state=Leaving served=1 icon=RGBA(0.500, 0.500, 0.500, 1.000) bubble=False
+AFTER_ALL :: ERROR: Compilation failed
+CAP :: ridery_after_virtual_feed 2004455
+REVEAL :: state=Leaving served0=1 icon=RGBA(0.500, 0.500, 0.500, 1.000)
+CAP :: ridery_gray_icon_evidence 2038750
+CONSOLE :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+REMOVE_VM :: removed=1
+STOPPED :: playing=False

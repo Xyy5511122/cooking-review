@@ -1,0 +1,43 @@
+RiderY(index2) 虚拟鼠标输入验证（独立 Unity Input System 设备）
+
+=== 设备与注入方式 ===
+- 设备：AddDevice<Mouse>("RiderYDragVirtualMouse" / "IsoVirtualMouse" / "IncVirtualMouse")
+- device id：27 / 28 / 29（各次独立 Play 会话）
+- interfaceName：[]（空 = 非 RawInput，非实体设备）
+- 注入：InputSystem.QueueStateEvent(vm, new MouseState{ position, buttons })，
+  buttons=(ushort)1 表示左键按下、0 表示松开
+- 时序：ADD→MOVE(松开)→PRESS→跨≥4 帧→12 步移动→跨≥3 帧→RELEASE→跨≥4 帧
+  （PointerSystem 依赖 wasPressedThisFrame / wasReleasedThisFrame 边沿，必须跨真实帧）
+- 未使用或控制用户实体鼠标；未用自动化工具抢占桌面输入。
+
+=== 真实处理链路上菜 ===
+- PRESS 后：PointerSystem.Instance.IsDragging = True，CurrentDrag = dish_potato_cake
+  （证明命中检测/BeginDrag 生效）
+- 拖动中：item 位置从 bowl(780,161) 移动到 (880,457) 再到骑手 (880,415)
+- RELEASE 后：经过 DropZone.OnDrop → TryServeBowlDish → ServeOne → TakeoutServed
+
+=== 送达结果（三次独立会话一致）===
+- RiderY tables[2]：state Waiting → Leaving，served[0]=1
+- 图标：RGBA(1,1,1,1) → RGBA(0.5,0.5,0.5,1)（灰化）
+- 气泡：bubble=True → False（外卖送达即隐藏、骑手离场）
+- 收入：income 0 → 8（土豆饼原价16、外卖半价8，RestaurantMenu.Price(takeout=true)=8）
+- PRICE 实测：potatoCake dineIn=16 takeout=8
+
+=== 隔离验证（五桌同时营业，isolation_log.txt）===
+投喂前：T0~T4 全部 Waiting / served=0 / 图标 RGBA(1,1,1,1) / bubble=1
+投喂后：
+  T0 Boy   [Waiting/DineIn]  srv=0 c0=白 bub=1  （不变）
+  T1 Uncle [Waiting/DineIn]  srv=0 c0=白 bub=1  （不变）
+  T2 RiderY[Leaving/Takeout] srv=1 c0=灰 bub=0  （本次目标）
+  T3 RiderB[Waiting/Takeout] srv=0 c0=白 bub=1  （不变）
+  T4 Girl  [Waiting/DineIn]  srv=0 c0=白 bub=1  （不变）
+
+=== Console ===
+所有会话 read_console(types=["error"]) = 0 条。
+
+=== 未验证 / 已知 ===
+- 实体鼠标真实拖拽手感：按任务要求未占用用户设备，留待正常游戏体验测试。
+- 骑手耐心耗尽生气离场路径：本轮未触发（固定等待、timeScale=0 冻结）。
+- 灰化截图取证：外卖送达后气泡/骑手立即隐藏，故在真实链路产生 Leaving+灰化状态后，
+  仅将已隐藏的 orderBubbleGo / dishIconRoots 重新 SetActive(true) 以便拍摄灰化外观；
+  状态本身完全由真实虚拟鼠标链路产生，未调用业务接口伪造。
