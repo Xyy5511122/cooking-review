@@ -1,0 +1,20 @@
+SET_RES :: set
+PLAY :: playing=True screen=1920x1080
+CLEAN_VIRTUAL :: removed=0
+SETUP :: setup
+PREPARE :: prepared_takeout=True slot0=dish_tomato_egg takeout=True
+POINTS :: bowl=(780.00,161.00) riderB_feed=(1040.00,410.00)
+BEFORE_STATES :: T0[Waiting/DineIn] served=00 icons=food_dish_potato_cake:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | T1[Waiting/DineIn] served=0 icons=food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | T3[Waiting/Takeout] served=0 icons=food_dish_tomato_egg:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | T4[Waiting/DineIn] served=000 icons=food_dish_tomato_egg:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_hot_sour_potato:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | 
+ADD_VIRTUAL_MOUSE :: virtual_id=22 current=22 iface=
+DEVICE_CHECK :: id=22 name=RiderBDragVirtualMouse iface= pos=(0.00, 0.00)
+MOVE_BOWL :: queued
+PRESS :: queued
+AFTER_PRESS :: dragging=True item=dish_tomato_egg mouse=(0.00, 0.00)
+BEFORE_RELEASE :: dragging=True item_pos=(1040.00, 452.00, 0.00) mouse=(0.00, 0.00)
+RELEASE :: queued
+AFTER_RELEASE :: dragging=False
+AFTER_STATES :: T0[Waiting/DineIn] served=00 icons=food_dish_potato_cake:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | T1[Waiting/DineIn] served=0 icons=food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | T3[Leaving/Takeout] served=1 icons=food_dish_tomato_egg:RGBA(0.50, 0.50, 0.50, 1.00); bubble=False | T4[Waiting/DineIn] served=000 icons=food_dish_tomato_egg:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_hot_sour_potato:RGBA(1.00, 1.00, 1.00, 1.00); bubble=True | 
+HANDLER_TRACE :: T3 state=Leaving kind=Takeout allServed=True income=9 readyCount=0
+CONSOLE_ERRORS :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+CAP_OK :: riderb_after_virtual_feed bytes=1943375
+REMOVE_VIRTUAL :: removed=1

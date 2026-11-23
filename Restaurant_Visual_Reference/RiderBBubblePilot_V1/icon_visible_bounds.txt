@@ -1,0 +1,40 @@
+RiderB(index3) 单菜图标实际可见像素边界 — 1920x1080 Play Mode
+测量方法：显示/隐藏图标两张真实运行截图的逐像素差分（>10），非 RectTransform 推算。
+截图：play_screenshots/riderb_v1_all_four_with_icon_1920x1080.png
+      play_screenshots/riderb_v1_all_four_without_icon_1920x1080.png
+
+坐标系：屏幕左上原点（截图原生坐标）；1920x1080，scaleFactor=1.0。
+
+[图标可见像素差分 bbox]
+  x = 1110 .. 1205   (width 96)
+  y = 379 .. 451     (height 73)
+  non-transparent/visible pixels = 4511
+  diff only in RiderB region: boy n=0 | uncle n=0 | riderB n=4511 | girl n=0
+
+[气泡暖白安全区（同宽度列扫描）]
+  在图标宽度 x[1110,1205] 各列，暖白(亮、暖色温)上缘最大值 = 366
+  暖白下缘最小值 = 464，净安全高 = 98px
+  图标顶部距暖白上缘 = 379 - 366 = 13px（正=在暖白内）
+  图标底部距暖白下缘 = 464 - 451 = 13px
+  → 上下各留 13px 暖白余量，完全落在安全区内
+
+[RectTransform 几何（运行时读数，仅作交叉参考）]
+  bubble Rect (screen) = x 1038..1278, y 585..740 (bottom-left origin)
+  bubble sprite = bubble_riderB_clean
+  icon Rect (screen) = x 1098.0,602.2 .. 1220.5,724.7 (bottom-left origin)
+  icon sizeDelta = 122.4 x 122.4, anchored = (121.3, 78.4)
+  icon sprite = food_dish_tomato_egg
+  注：RectTransform 含透明边，实际可见像素以差分 bbox 为准。
+
+[与其他元素的关系]
+  - 椭圆描边 body: bg x[1051,1261] y[385,448]；椭圆 ext top=352 bottom=474
+    图标可见像素距描边内缘最近约 13px（暖白余量），不覆盖/压住描边。
+  - 尾巴：折线尖端约 bg (1098,487)，在气泡左下。图标底 y=451（含 44px 到气泡底 495），
+    距尾巴尖约 30+px，不接触尾巴。
+  - 绿植：bg x>=1244 y>=449 起，位于气泡右下。图标右缘 x=1205，距绿植最近约 39px，不接触。
+  - 耐心条/骑手头盔：骑手卡片中心 screen (1040,410)，头盔上缘约 y=490(bg)。
+    图标在气泡内 y379..451，不遮挡耐心条（耐心条在骑手头顶、气泡右下方，与本气泡不重叠）。
+
+[布局参数（本轮独立标定）]
+  s_riderBBubbleLayout = { bubbleW=240, iconCy=80, visible1=96, visible2=84, visible3=64, gap2=12, gap3=5 }
+  骑手订单固定单菜（RestaurantMenu.MakeOrder(takeout=true) → count=1），实际只用 visible1=96。

@@ -1,0 +1,49 @@
+RiderB(index3) 虚拟鼠标交互验证 — 设备/注入方式/处理链路
+本轮未使用、未控制用户实体鼠标；未调用 ServeOne()/ManualTick() 改变订单状态来冒充拖拽。
+
+[输入设备]
+- 独立 Unity InputSystem 虚拟 Mouse：`RiderBDragVirtualMouse`（device id 25，description.interfaceName 为空 = 非 RawInput 实体设备）。
+- 验证前先清除所有既有虚拟 mouse（本轮 removed=0，未触碰实体 RawInput）。
+- 灰化取证脚本用同构虚拟 Mouse `GrayRobustVirtualMouse`（device id 26）。
+
+[注入方式]
+- `InputSystem.AddDevice<Mouse>(name)` 创建隔离虚拟设备；
+- `InputSystem.QueueStateEvent(vm, new MouseState{ position=..., buttons=... })` 注入位置与左键状态；
+- buttons：未按下 0 / 按下 (ushort)1；
+- 关键时序：press/release 的 wasPressedThisFrame/wasReleasedThisFrame 边沿必须在**不同真实 Editor 帧**被 PointerSystem.Update 观察到。
+  首次成功的 virtual_drag.py 自然满足；复跑出现 dragging=False（边沿丢失）；稳健版 gray_capture3.py 在每次 queue 之间等待多个真实帧后稳定成功。
+  这是虚拟输入的帧边沿要求，非游戏缺陷；如实记录供审阅。
+
+[实际处理链路（真实游戏指针链，日志逐项可见）]
+  QueueStateEvent → PointerSystem.Update 读取 Mouse.current.position + leftButton 边沿
+  → HandleFrame → PickDraggable / BeginDrag（AFTER_PRESS: dragging=True item=dish_tomato_egg）
+  → 逐帧移动，物品跟随（BEFORE_RELEASE: item_pos=(1040,452)）
+  → TryDrop → DropZone.OnDrop → GameManager.TryServeBowlDish
+  → 校验 kind：外卖盒(bs.takeoutDish=true) 对 Takeout 骑手，匹配
+  → DiningTable.ServeOne("dish_tomato_egg") → RemoveReadyDish → TakeoutServed()
+  → 半价入账 + 骑手离场 + 气泡隐藏。
+
+[验证结果（virtual_drag_log.txt，四桌同营业）]
+  投喂前：T3[Waiting/Takeout] served=0 icon=RGBA(1,1,1,1) bubble=True
+  按下后：dragging=True item=dish_tomato_egg
+  松开后：dragging=False
+  投喂后：T3[Leaving/Takeout] served=1 icon=RGBA(0.50,0.50,0.50,1) bubble=False
+          allServed=True income=9（外卖半价） readyCount=0
+  隔离：T0[Waiting] served=00、T1[Waiting] served=0、T4[Waiting] served=000 及全部图标颜色
+        投喂前后完全一致（均白 RGBA(1,1,1,1)、气泡 True）。
+  Console error = 0。
+
+[灰化视觉取证（gray_capture_log.txt）]
+- 同一真实虚拟鼠标链路投喂成功后（state=Leaving served=1 icon=RGBA(0.5,0.5,0.5,1)，运行时读数确认），
+  由于外卖骑手送达即离场、气泡由游戏设计自动隐藏，灰化与隐藏同帧发生；
+  仅为拍摄灰化外观，脚本把已隐藏的气泡/图标 UI 重新 SetActive(true)，不改变任何 state/served/颜色值
+  （REVEAL 前后读数均为 state=Leaving served0=1 icon=RGBA(0.5,0.5,0.5,1)）。
+- 截图：play_screenshots/riderb_v1_gray_icon_evidence.png、riderb_v1_gray_zoom_4x.png
+- 送达后即时截图（未重新显示 UI）：play_screenshots/riderb_v1_after_virtual_feed_rider_left.png
+  （骑手已离场、气泡消失、+¥9 外卖飘字）。
+- Console error = 0；虚拟设备已在结束时移除。
+
+[未验证 / 未做]
+- 未做真实实体鼠标拖拽（按任务要求，实体鼠标使用体验留待正常游玩测试，本轮不要求用户配合）。
+- 未测骑手耐心耗尽（生气离场）路径下的气泡隐藏。
+- 未测 RiderY(index2)（本轮明确不推广）。
