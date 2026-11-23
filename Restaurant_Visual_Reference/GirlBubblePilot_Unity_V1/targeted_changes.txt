@@ -1,0 +1,27 @@
+本次最小代码改动摘要（仅记录本轮增量，不含用户原有 212 项未提交改动）
+======================================================================
+
+[A] Assets/Resources/Art/Restaurant/bubble_girl_clean.png（新增）
+- 来源：cooking-review commit 817394d36f7035227708ed5c67761719de8499c2
+  Restaurant_Visual_Reference/GirlBubblePilot_V2/girl_bubble_candidate.png
+- MD5：09eac2128e06c41c3152d8552a28bb52（未重新生成、未修改）
+
+[B] Assets/Scripts/CookingDemo/UIBuilder.cs（增量修改）
+- BuildTable 中把 Phase B 从硬编码 index0 改为显式表：
+  bubbleRes  = { "bubble_boy_clean", null, null, null, "bubble_girl_clean" }
+  bubbleX    = { 114f, 0f, 0f, 0f, 1458f }
+  bubbleY    = { 670f, 0f, 0f, 0f, 656f }   // Girl: 1080 - 268 - 156
+  bubbleW/H  = Boy 343×204 / Girl 280×156
+- 仅 index 0 与 index 4 创建 orderBubbleGo / dishIconRoots / dishIcons；节点名带 index 后缀。
+- Boy 的数值与路径未变；其他三桌仍不创建气泡/图标节点。
+- 若 Girl sprite 加载失败，新增一条明确 `[GirlBubblePilot] missing bubble sprite` 错误日志（实测未触发）。
+
+[C] Assets/Scripts/CookingDemo/DiningTable.cs（增量修改）
+- 新增 BubbleIconLayout 结构体与两套独立布局：
+  Boy  (index0): bubbleW=343, iconCy=102, visible1/2/3=148/124/92, gap2/gap3=18/6
+  Girl (index4): bubbleW=280, iconCy=88,  visible1/2/3=116/100/74, gap2/gap3=14/6
+- BindBubbleIcons() 仅把原先硬编码的 343 / 102 / 148 / 124 / 92 / 18 / 6 改为按 index 取布局；index0 值与修改前完全一致。
+- 其余代码（order、served、ServeOne、AllServed、StartEating、HideBubbleOrder、耐心条、送菜流程）未改。
+
+[D] 未做的事
+- 未重构餐厅 UI；未改其他桌参数；未新增通用框架；未修改正式订单逻辑；未提交主仓库。

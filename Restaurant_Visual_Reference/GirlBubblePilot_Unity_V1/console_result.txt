@@ -1,0 +1,18 @@
+Unity Console 测试结果（Girl 气泡 V2 单桌 Pilot）
+================================================
+
+1) 编译与导入阶段
+- 脚本修改后 Unity 自动编译完成。
+- `read_console` 过滤 error：未发现 error CS 或运行异常。
+- 仍有 17 条既有 warning（CS0618 / CS0168 / CS0414），均来自既有文件，未来自本次修改的 UIBuilder.cs / DiningTable.cs，也未来自新素材。
+
+2) Play Mode 实测阶段
+- 进入餐厅视图，启动营业，冻结 Time.timeScale=0 后执行单菜 / 双菜 / 灰化 / 全部完成隐藏测试。
+- `read_console` 过滤 error 返回：`Retrieved 0 log entries.` → Console Error = 0。
+- 未出现资源丢失、Sprite 为 null、脚本异常或 UI 绑定异常日志。
+
+3) 工程自检
+- unity-game-suite 离线自检：`metaPairing` / `guidUnique` / `csharp` 三项通过，错误 0、警告 0。
+- 详见 `project_check.json`。
+
+结论：本次 Pilot 未引入新的 Console Error。

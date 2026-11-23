@@ -1,0 +1,33 @@
+{
+  "projectDir": "E:\\un\\u\\My project (1)",
+  "errorCount": 0,
+  "warningCount": 0,
+  "items": [
+    {
+      "level": "info",
+      "check": "metaPairing",
+      "message": "470 个文件与 29 个目录的元数据配对完整",
+      "path": "",
+      "hint": "",
+      "files": []
+    },
+    {
+      "level": "info",
+      "check": "guidUnique",
+      "message": "499 个 GUID 全部唯一",
+      "path": "",
+      "hint": "",
+      "files": []
+    },
+    {
+      "level": "info",
+      "check": "csharp",
+      "message": "检查了 55 个 C# 脚本",
+      "path": "",
+      "hint": "",
+      "files": []
+    }
+  ],
+  "scriptVersion": "1.1.0",
+  "ignored": {}
+}
