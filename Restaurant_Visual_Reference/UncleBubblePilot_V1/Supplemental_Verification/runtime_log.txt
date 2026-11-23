@@ -1,0 +1,91 @@
+Uncle 气泡 V1 补充验证 — 运行时日志
+====================================
+时间：2026-11-23（GMT+8）
+分辨率：1920×1080（GameView 自定义 SetCustomResolution 精确设定，Screen=1920×1080）
+画布：Canvas.scaleFactor=1.000000；参考 1920×1080
+Play Mode：已进入；Unity 6.4 (6000.4.7f1)；InputSystem RawInput Mouse id=2
+
+【只读声明】本轮未修改任何工程文件、C#、Prefab、素材或布局参数；
+未调用 ServeOne() / ManualTick() 或其他业务接口代替鼠标操作；
+所有游戏推进仅通过真实 OS 鼠标事件（第 2 节验证 A）。
+
+------------------------------------------------------------
+一、起始状态（setup.tables + prepare）
+------------------------------------------------------------
+setup :: phase=Prep
+prepare :: spawn=True slot0=dish_pepper_beef
+（用 FoodItem.Create + PutCookedDishInSlot 仅把成品菜放入备菜槽，等价“备好待拖的菜”，
+  不代替上菜动作；上菜必须由鼠标拖拽完成。）
+
+T0[Waiting]  order=土豆饼 / 青椒炒肉        icons: potato_cake=white, pepper_beef=white
+T1[Waiting]  order=青椒炒肉（Uncle 单菜）   icons: pepper_beef=white
+T4[Waiting]  order=番茄炒蛋 / 青椒炒肉 / 酸辣土豆丝  icons: 三菜均 white
+Console error 数：0
+
+------------------------------------------------------------
+二、验证 A：真实 OS 鼠标拖拽 —— 未通过（环境输入注入失败）
+------------------------------------------------------------
+目标：真实 OS 鼠标从备菜槽 (game 330,203) 拖到 Uncle (game 640,600)。
+
+坐标探针（Unity 运行时 RectTransform 世界角点）：
+  bowl 中心 = (330.00, 203.00)
+  Uncle 顾客中心 = (640.00, 600.00)
+
+鼠标标定过程（move_to_game，真实 mouse_event + OS 光标 + Unity Mouse.position 闭环）：
+
+  尝试 0..2：target=(330,203) read=(870.0,92.2)    err=(-540, +110.8)   -- 无响应
+  尝试 3..6：target=(330,203) read=(351.6,625.6)   err=(-21.6, -422.6)  -- 跳变到另一固定值
+  尝试 7..9：target=(330,203) read=(870.0,92.2)    err=(-540, +110.8)   -- 跳回
+  CALIB_BOWL_OK = False
+
+点击测试：
+  left_down 后 PointerSystem.IsDragging = False; CurrentDrag = null
+  （鼠标按下未被游戏识别，未形成拖拽）
+  left_up 后 IsDragging = False
+
+诊断（确认是环境层输入注入失败，非游戏逻辑问题）：
+  - GameView.maximized = False（已排除上轮最大化导致映射失效的因素）
+  - EditorWindow.focusedWindow = GameView；前台窗口句柄 = 0x10b8e（Unity 主窗口）
+  - InputSystem 设备：Mouse id=2，interface=RawInput，updateMode=ProcessEventsInDynamicUpdate
+  - OS SetCursorPos 能稳定把物理光标放到目标点，但 Unity Mouse.position 读数冻结在两个
+    固定值（870.03,92.23）与（1220.19,201.62）之间跳变，Mouse.delta.ReadValue() 恒为 (0,0)
+  - 相对 mouse_event 的斜率测量自相矛盾（sx≈0、sy≈5 且方向不符），
+    请求的光标增量被系统“抵消/吸附”回原位（os 从 (631,320) 请求 +60 后读回 629,383）
+  - 重启 Play Mode 后复测：读数在 (0,0) 与偶发值间跳变，仍不可靠
+
+结论：OS 鼠标事件无法在本环境可靠驱动 Unity InputSystem。
+      按任务约束，未用模拟接口替代；拖拽投喂、按下/拖动/松开的识别、Uncle 灰化、
+      Boy/Girl 不受影响 —— 均记为【未验证】，不得宣称通过。
+
+送菜前后状态（拖拽未实际发生，状态保持不变）：
+  before served: T0=00  T1=0  T4=000
+  before icon colors: 全部 RGBA(1,1,1,1)
+  after  served: T0=00  T1=0  T4=000
+  after  icon colors: 全部 RGBA(1,1,1,1)
+  after  Console error 数：0
+
+截图：uncle_before_drag.jpg / uncle_after_drag.jpg 均为餐厅视图，画面一致（因拖拽未发生）。
+
+------------------------------------------------------------
+三、验证 B：图标实际可见边界 —— 已读取运行时数据（见 icon_visible_bounds.txt）
+------------------------------------------------------------
+运行时几何（1920×1080，scaleFactor=1）：
+  bubble Rect (bottom-origin): x 628.000..868.000  y 682.000..814.000
+  icon  Rect (bottom-origin): x 681.936..814.065  y 695.936..828.065
+  icon sizeDelta = 132.129×132.129 ; anchoredPosition=(120,80)
+  sprite = food_dish_pepper_beef ; texture 1024×1024
+  textureRect = (75.1, 80.0, 873.8, 864.9)
+  Image.Type.Simple, preserveAspect=false
+
+源 PNG alpha>32 可见包围盒（独立核验，与 DiningTable.cs 的 BubbleIconFit 表一致）：
+  x 78..945, y 82..941（图像坐标，y 自顶向下）；alphaW=868 alphaH=860 cx=511.5 cy=511.5
+
+详见 icon_visible_bounds.txt 与 uncle_bubble_zoom.png。
+视觉放大图显示：圆盘顶部越过气泡拱形描边、露在玻璃门背景上（真实越界，非透明边缘假象）。
+
+------------------------------------------------------------
+四、结束
+------------------------------------------------------------
+Play Mode：已停止（manage_editor stop）
+主仓库、素材、布局参数：未修改
+Console error：0
