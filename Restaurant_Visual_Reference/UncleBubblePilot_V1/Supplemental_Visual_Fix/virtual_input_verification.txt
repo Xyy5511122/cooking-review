@@ -1,0 +1,71 @@
+Uncle 虚拟鼠标投喂验证（隔离输入设备，未使用实体鼠标）
+======================================================
+
+输入设备
+--------
+注入设备：Unity Input System 虚拟 Mouse "UncleDragVirtualMouse"
+device id：21
+interfaceName：空（非 RawInput）
+物理设备：RawInput Mouse id=2，未被注入事件、未被控制
+测试结束：RemoveDevice 后 Mouse.current 回到 id=2
+
+注入方式
+--------
+InputSystem.AddDevice<Mouse>()
+InputSystem.QueueStateEvent(MouseState{position=..., buttons=1})  // 左键按下
+InputSystem.QueueStateEvent(MouseState{position=..., buttons=0})  // 松开
+移动：从备菜槽到 Uncle 顾客 12 步线性插值，每步 queue + 等待真实帧
+未调用 mouse_event / SetCursorPos / 任何 OS 级实体鼠标控制
+未直接调用 ServeOne() / ManualTick() 或其他业务接口改变订单状态
+
+实际处理链路
+------------
+虚拟 Mouse
+  -> InputSystem
+  -> PointerSystem.Update()
+  -> PointerSystem.HandleFrame()
+  -> PickDraggable() / BeginDrag()
+  -> 每帧跟随虚拟指针位置
+  -> TryDrop()
+  -> DropZone.OnDrop()
+  -> GameManager.TryServeBowlDish()
+  -> DiningTable.ServeOne()
+
+备菜（非上菜）方式
+------------------
+FoodItem.Create + PutCookedDishInSlot("dish_pepper_beef", false)
+只把成品放入备菜槽，不代替上菜动作。
+
+实测坐标
+--------
+备菜槽中心：(780.00, 161.00)
+Uncle 顾客中心：(640.00, 600.00)
+
+状态记录
+--------
+[按下前]
+T0 Waiting served=00 icons white/white
+T1 Waiting served=0  icon white
+T4 Waiting served=000 icons white/white/white
+
+[按下后]
+dragging=True, CurrentDrag=dish_pepper_beef
+
+[拖动中/松开前]
+dragging=True, item position=(640.00, 642.00)
+virtual mouse position=(640.00, 600.00)
+
+[松开后]
+dragging=False
+
+[最终结果]
+T0 仍 Waiting  served=00 icons RGBA(1,1,1,1) / RGBA(1,1,1,1)
+T1 Waiting -> Eating, served=1, icon food_dish_pepper_beef RGBA(0.50,0.50,0.50,1.00)
+T4 Waiting served=000, icons all RGBA(1,1,1,1)
+Console error = 0
+
+判定
+----
+通过。虚拟鼠标事件经过游戏真实指针命中、拖拽、放下与上菜处理链路，
+Uncle 菜品正确送达且图标灰化；Boy/Girl 状态与图标颜色不受影响。
+实体鼠标体验不属于本轮验收前置条件，未要求用户配合，未尝试控制实体输入。

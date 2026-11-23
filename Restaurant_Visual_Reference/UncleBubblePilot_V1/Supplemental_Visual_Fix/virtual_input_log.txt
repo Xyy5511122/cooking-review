@@ -1,0 +1,18 @@
+SET_RES :: set 1920x1080
+PLAY :: playing=True screen=1920x1080
+CLEAN_VIRTUAL :: removed=1
+SETUP :: setup phase=Open
+PREPARE :: prepared=True slot0=dish_pepper_beef
+POINTS :: bowl=(780.00,161.00) uncle_feed=(640.00,600.00)
+BEFORE_STATES :: T0[Waiting] served=00 icons=food_dish_potato_cake:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); | T1[Waiting] served=0 icons=food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); | T4[Waiting] served=000 icons=food_dish_tomato_egg:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_hot_sour_potato:RGBA(1.00, 1.00, 1.00, 1.00); | 
+ADD_VIRTUAL_MOUSE :: virtual_id=21 current=21 iface=
+DEVICE_CHECK :: id=21 name=UncleDragVirtualMouse iface= pos=(0.00, 0.00)
+MOVE_BOWL :: queued pos=(780.000000,161.000000) buttons=none
+PRESS :: queued pos=(780.000000,161.000000) buttons=left
+AFTER_PRESS :: dragging=True item=dish_pepper_beef mouse=(0.00, 0.00)
+BEFORE_RELEASE :: dragging=True item_pos=(640.00, 642.00, 0.00) mouse=(640.00, 600.00)
+RELEASE :: queued pos=(640.000000,600.000000) buttons=none
+AFTER_RELEASE :: dragging=False
+AFTER_STATES :: T0[Waiting] served=00 icons=food_dish_potato_cake:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00); | T1[Eating] served=1 icons=food_dish_pepper_beef:RGBA(0.50, 0.50, 0.50, 1.00); | T4[Waiting] served=000 icons=food_dish_tomato_egg:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_pepper_beef:RGBA(1.00, 1.00, 1.00, 1.00);food_dish_hot_sour_potato:RGBA(1.00, 1.00, 1.00, 1.00); | 
+CONSOLE_ERRORS :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+REMOVE_VIRTUAL :: removed=1 current=2

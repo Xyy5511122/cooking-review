@@ -1,0 +1,16 @@
+REFRESH :: refreshed
+SET_RES :: set 1920x1080
+PLAY :: playing=True screen=1920x1080
+SETUP :: setup phase=Open view restaurant
+GEOMETRY :: bubble=628.000,682.000-868.000,814.000 iconRect=705.530,721.530-790.470,806.470 sizeDelta=(84.940, 84.940) anchored=(120.000, 82.000) scaleFactor=1.000000
+TABLES :: T0[Waiting] order=土豆饼¥16  青椒炒肉¥28 served=00 icons=A/food_dish_potato_cake/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(1.000, 1.000, 1.000, 1.000); bubble=True | T1[Waiting] order=青椒炒肉¥28 served=0 icons=A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T4[Waiting] order=番茄炒鸡蛋¥18  青椒炒肉¥28  酸辣土豆丝¥16 served=000 icons=A/food_dish_tomato_egg/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_hot_sour_potato/RGBA(1.000, 1.000, 1.000, 1.000); bubble=True | 
+CONSOLE :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
+CAPTURE_REQ :: ok
+CAPTURE_OK :: after_with_icon bytes=1919857
+ICON_OFF :: off
+CAPTURE_REQ :: ok
+CAPTURE_OK :: after_without_icon bytes=1909916
+ICON_ON :: on
+GEOMETRY_FINAL :: bubble=628.000,682.000-868.000,814.000 iconRect=705.530,721.530-790.470,806.470 sizeDelta=(84.940, 84.940) anchored=(120.000, 82.000) scaleFactor=1.000000
+TABLES_FINAL :: T0[Waiting] order=土豆饼¥16  青椒炒肉¥28 served=00 icons=A/food_dish_potato_cake/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(1.000, 1.000, 1.000, 1.000); bubble=True | T1[Waiting] order=青椒炒肉¥28 served=0 icons=A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000);-/-/RGBA(0.000, 0.000, 0.000, 0.000); bubble=True | T4[Waiting] order=番茄炒鸡蛋¥18  青椒炒肉¥28  酸辣土豆丝¥16 served=000 icons=A/food_dish_tomato_egg/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_pepper_beef/RGBA(1.000, 1.000, 1.000, 1.000);A/food_dish_hot_sour_potato/RGBA(1.000, 1.000, 1.000, 1.000); bubble=True | 
+CONSOLE_FINAL :: {"success":true,"message":"Retrieved 0 log entries.","data":[]}
