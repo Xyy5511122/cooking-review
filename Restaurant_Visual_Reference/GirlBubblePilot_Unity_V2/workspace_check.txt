@@ -1,0 +1,33 @@
+Girl 气泡 V2 Unity Pilot 第二阶段：工作区安全检查
+====================================================
+
+开始前
+------
+主仓库分支：refactor/data-driven-food
+主仓库 HEAD：d2f014507388893dbcb053ae4929d81734efb8e6
+未提交改动数量：212
+Boy V3 MD5：197305afc71dad9f3ffb795942171024
+Girl V2 MD5：09eac2128e06c41c3152d8552a28bb52
+审阅仓库 HEAD：6b895707e7e81a651bf1eecff6def77efb195e7d
+审阅仓库状态：clean
+
+结束后
+------
+主仓库分支：refactor/data-driven-food
+主仓库 HEAD：d2f014507388893dbcb053ae4929d81734efb8e6
+未提交改动数量：212
+Boy V3 MD5：197305afc71dad9f3ffb795942171024
+Girl V2 MD5：09eac2128e06c41c3152d8552a28bb52
+
+本轮主仓库工程文件修改清单：无
+- 当前 git status --porcelain=v1 与上一轮任务结束时的状态文件逐行一致（diff 为空）。
+- 以 2026-11-23 21:55:00 为界扫描 Assets 下所有文件，没有任何文件在本轮任务开始后被写入。
+- Assets/_Recovery/0 (14)/0 (15)/0 (16) 及其 .meta 在本轮开始前已经存在（上一轮结束状态第 199–204 行），本轮未新增、未删除、未清理。
+- 未修改 UIBuilder.cs、DiningTable.cs、任何 PNG/.meta、订单生成逻辑、其他桌、Canvas Scaler 或锚点。
+- 未执行 reset / clean / stash / rebase。
+- 未提交或推送游戏主仓库。
+
+编辑器侧临时操作（非工程文件）
+-------------------------------
+- 使用 GameView 反射接口 SetCustomResolution 临时切换 Game View 尺寸（796x448 / 1920x1080 / 1844x1037 / 1280x1024），仅改变编辑器视图状态，未写入 Assets。
+- 进入/退出 Play Mode，未产生新的场景文件；退出后工作区状态与基线一致。
