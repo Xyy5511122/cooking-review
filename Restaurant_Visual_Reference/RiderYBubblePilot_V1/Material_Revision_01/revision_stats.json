@@ -1,0 +1,57 @@
+{
+  "base_md5_expected": "7aa672cf51db056f664cc26790db0a7e",
+  "output": "bubble_riderY_clean_rev01.png",
+  "size": [
+    265,
+    160
+  ],
+  "ctop": [
+    253.0,
+    247.0,
+    239.0
+  ],
+  "cbot": [
+    252.0,
+    243.0,
+    234.0
+  ],
+  "changed_px_vs_base": 625,
+  "changed_ratio_vs_base_pct": 1.474,
+  "changed_bbox_crop": [
+    63,
+    78,
+    160,
+    89
+  ],
+  "changed_bbox_bg": [
+    858,
+    418,
+    955,
+    429
+  ],
+  "four_edge_max_diff": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "stroke_pixels_base": 3218,
+  "stroke_pixels_rev": 3218,
+  "stroke_pixels_changed_color": 0,
+  "alpha_max": 1.0,
+  "md5_base": "7aa672cf51db056f664cc26790db0a7e",
+  "md5_rev": "b1cc328a8a77df6876aefb0967b8b3b0",
+  "md5_orig_crop": "59fa8218f285d1ad846037fb7db520a3",
+  "edges_vs_base": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "edges_vs_original_crop": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  }
+}
